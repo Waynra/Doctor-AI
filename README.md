@@ -12,7 +12,12 @@ Chatbot ini adalah asisten medis berbasis AI yang dirancang untuk memberikan edu
 ## Tampilan Antarmuka (UI)
 Berikut adalah tampilan antarmuka (UI) frontend yang telah diperbarui, terasa minimalis dan berfokus murni pada fitur utama Chatbot (Konsultasi Aktif):
 
+<<<<<<< HEAD
 ![Tampilan UI Dokter Santai](UI%20Preview.png)
+=======
+![Tampilan UI Dokter Santai](ui preview.png)
+*(Catatan: Harap simpan tangkapan layar (screenshot) UI Anda ke direktori ini dengan nama `ui preview.png` agar gambar di atas bisa ditampilkan dengan benar saat membaca README ini).*
+>>>>>>> 3890e695b90f92094b8a4406241b3cd270f6bae6
 
 ## Panduan Konfigurasi & Menjalankan (Untuk Pemula)
 
