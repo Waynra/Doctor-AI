@@ -10,23 +10,45 @@ Chatbot ini adalah asisten medis berbasis AI yang dirancang untuk memberikan edu
 - **Rekomendasi**: Memberikan saran gaya hidup sehat berdasarkan topik pembicaraan.
 
 ## Tampilan Antarmuka (UI)
-Berikut adalah tampilan antarmuka (UI) frontend yang telah diperbarui, minimalis dan berfokus murni pada fitur Chatbot (Konsultasi Aktif):
+Berikut adalah tampilan antarmuka (UI) frontend yang telah diperbarui, terasa minimalis dan berfokus murni pada fitur utama Chatbot (Konsultasi Aktif):
 
-![Tampilan UI Dokter Santai](ui-preview.png)
-*(Catatan: Harap simpan tangkapan layar (screenshot) UI Anda ke direktori ini dengan nama `ui-preview.png` agar gambar di atas bisa ditampilkan dengan benar saat membaca README ini).*
+![Tampilan UI Dokter Santai](UI%20Preview.png)
 
-## Cara Menjalankan
+## Panduan Konfigurasi & Menjalankan (Untuk Pemula)
 
-1. **Install Dependensi**
+Ikuti langkah demi langkah di bawah ini dengan santai untuk mulai memakai aplikasi ini di komputer Anda:
+
+### Cara 1: Mengakses Chatbot AI Secara Langsung (Sangat Mudah)
+Kecerdasan buatan (Logika *NLP/Natural Language Processing*) saat ini sudah terintegrasi langsung di dalam berkas HTML, sehingga Anda tidak perlu menyalakan *server backend* untuk mencoba konsultasi awal:
+1. Buka folder `frontend` yang ada di dalam proyek ini menggunakan *File Explorer*.
+2. Cari file bernama **`dokter-santai.html`**.
+3. **Klik dua kali** (`Double click`) pada file tersebut.
+4. Voila! Tampilan Chatbot AI akan otomatis terbuka di browser Anda (Google Chrome / Microsoft Edge / Safari) dan siap menjadi teman konsultasi kesehatan.
+
+### Cara 2: Menyalakan Server Backend (Untuk Pengembangan / API)
+Bila Anda adalah *developer* yang ingin mengubah fungsionalitas lanjutan di sistem Python, Anda perlu menjalankan proses ini:
+
+**Langkah 1: Pastikan Python Sudah Terinstal**
+- Jika komputer Anda belum pernah dipasangi bahasa pemrograman Python, unduh gratis dari [python.org/downloads](https://www.python.org/downloads/). 
+- *Penting:* Ingatlah untuk mencentang tulisan *"Add Python to PATH"* di bagian bawah saat awal mula klik tombol Install!
+
+**Langkah 2: Buka Jendela Perintah (Terminal / CMD)**
+- Buka lokasi folder proyek ini menggunakan File Explorer.
+- Di kotak alamat atas (*Address Bar*), ketikkan `cmd` kemudian tekan *Enter* di keyboard. Jendela terminal hitam akan muncul.
+
+**Langkah 3: Mengunduh Persiapan Sistem (Dependensi)**
+- Pada jendela hitam tersebut, salin & tempel kode ini lalu tekan *Enter*:
    ```bash
    pip install -r requirements.txt
    ```
+- Tunggu proses muatan atau *download* bar merah/putih hingga tertulis status *Successful*.
 
-2. **Jalankan Server**
+**Langkah 4: Menghidupkan Mesin (Server)**
+- Masih di jendela hitam yang sama, ketikkan:
    ```bash
    python main.py
    ```
-   Server akan berjalan di `http://localhost:8000`.
+- Biarkan jendela layar hitam tersebut tetap terbuka saat mengecek aplikasinya. Tanda bahwa *server* telah sukses menyala adalah ketika terminal menayangkan tulisan bahwa server berjalan di `http://localhost:8000`.
 
 ## API Endpoints
 
