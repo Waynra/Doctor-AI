@@ -1,10 +1,19 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Optional
 import uvicorn
 from chatbot_engine import chatbot
 
-app = FastAPI(title="Chatbot Dokter Santai", description="AI Chatbot for Patient Education and Customer Service")
+
+# Konfigurasi CORS agar frontend bisa akses API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Ganti dengan ["http://localhost:5500"] jika ingin lebih aman
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ChatRequest(BaseModel):
     user_id: str

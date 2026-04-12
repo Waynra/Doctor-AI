@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Dokter Santai | Konsultasi AI</title>
+  <!-- Material Symbols -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Google Fonts: Manrope & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            headline: ["Manrope"],
+            body: ["Inter"],
+            label: ["Inter"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+    }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #dce4e8; border-radius: 10px; }
+  </style>
+</head>
+<body class="bg-[#f7f9fb] text-[#2c3437]">
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-72 p-6 flex flex-col gap-4 bg-[#f0f4f7] font-['Manrope'] font-semibold tracking-tight">
+  <div class="mb-8 flex items-center gap-3">
+    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-300 flex items-center justify-center">
+      <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+    </div>
+    <div>
+      <div class="text-xl font-bold text-blue-700">Dokter Santai</div>
+      <div class="text-[10px] uppercase tracking-widest text-[#596064] opacity-70">AI Kesehatan</div>
+    </div>
+  </div>
+  <button class="mb-4 w-full py-4 px-6 bg-gradient-to-br from-blue-600 to-blue-300 text-white rounded-full font-bold shadow-lg shadow-blue-400/20 flex items-center justify-center gap-2 transition-transform active:scale-95">
+    <span class="material-symbols-outlined">add</span>
+    Konsultasi Baru
+  </button>
+  <nav class="flex-1 space-y-2">
+    <a class="flex items-center gap-3 px-4 py-3 text-blue-700 font-bold bg-white rounded-lg transition-colors" href="#">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+      Konsultasi
+    </a>
+  </nav>
+</aside>
+<!-- Top Bar -->
+<header class="fixed top-0 right-0 left-72 bg-[#f7f9fb]/80 backdrop-blur-xl flex justify-between items-center px-8 py-4 z-10">
+  <div class="flex items-center gap-4">
+    <h1 class="font-bold text-lg tracking-tight">Konsultasi Aktif</h1>
+    <span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider">Mode Klinik</span>
+  </div>
+
+</header>
+<!-- Main Content -->
+<main class="ml-72 pt-20 h-screen flex flex-col bg-[#f7f9fb] overflow-hidden">
+  <!-- Chat Thread -->
+  <div id="chat-thread" class="flex-1 overflow-y-auto px-8 py-8 custom-scrollbar space-y-8 max-w-4xl mx-auto w-full">
+    <!-- Chat akan diisi oleh JS -->
+  </div>
+  <!-- Input Section -->
+  <div class="p-8 bg-[#f0f4f7]/50 backdrop-blur-md">
+    <div class="max-w-4xl mx-auto w-full space-y-6">
+      <!-- Quick Suggested Questions -->
+      <div id="suggested-questions" class="flex gap-3 overflow-x-auto pb-2 custom-scrollbar"></div>
+      <!-- Chat Input Container -->
+      <form id="chat-form" class="relative">
+        <div class="bg-white rounded-[2rem] p-2 flex items-center gap-2 shadow-[0_20px_50px_rgba(0,94,184,0.05)] border border-[#acb3b7]/5">
+          <input id="user-input" class="flex-1 bg-transparent border-none focus:ring-0 text-[#2c3437] py-3 px-4 text-sm placeholder:text-[#596064]/50" placeholder="Tulis pesan ke Dokter Santai..." type="text" autocomplete="off" required />
+          <button type="submit" class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-300 text-white rounded-full flex items-center justify-center shadow-lg shadow-blue-400/20 hover:brightness-110 active:scale-90 transition-all">
+            <span class="material-symbols-outlined">arrow_upward</span>
+          </button>
+        </div>
+      </form>
+      <p class="text-center text-[10px] text-[#596064] opacity-40 font-medium">
+        Dokter Santai AI hanya untuk edukasi, bukan pengganti dokter profesional.
+      </p>
+    </div>
+  </div>
+</main>
+<script src="https://unpkg.com/compromise"></script>
+<script src="dokter-santai.js"></script>
+</body>
+</html>
