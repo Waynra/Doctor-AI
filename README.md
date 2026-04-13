@@ -4,7 +4,7 @@ Chatbot ini adalah asisten medis berbasis AI yang dirancang untuk memberikan edu
 
 ## Fitur Utama
 - **Generative AI LLM**: Didukung penuh oleh kecerdasan model canggih *Google Gemini 2.5 Flash* lewat paket `google-genai` SDK terbaru untuk memahami hampir seluruh ragam kalimat pengguna.
-- **Persona Dokter Santai**: Gaya bahasa *Prompting* diatur mendalam agar AI bertindak super akrab (menyebut 'kamu', 'bro/sis') dan tidak serba-kaku (*robotic*).
+
 - **Dual-State Memory System**: Menyimpan untaian riwayat percakapan Anda baik di ranah *server FastAPI lokal* maupun sinkronisasi asli berbasis _System Context_ agar konsultasi tidak tercampur/lupa.
 - **Konsultasi Tanpa Batas Ruang Lingkup**: Tidak terkunci pada kata sandi tertentu (bukan tipe _hardcoded intent_), sehingga model bersedia menjawab keluhan fisik paling rumit sekalipun.
 
