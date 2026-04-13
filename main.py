@@ -6,6 +6,8 @@ import uvicorn
 from chatbot_engine import chatbot
 
 
+app = FastAPI()
+
 # Konfigurasi CORS agar frontend bisa akses API
 app.add_middleware(
     CORSMiddleware,
@@ -29,7 +31,7 @@ async def root():
     return {"message": "Selamat datang di API Chatbot Dokter Santai! Ada yang bisa aku bantu?"}
 
 @app.post("/chat", response_model=ChatResponse)
-async def chat(request: ChatRequest):
+def chat(request: ChatRequest):
     try:
         # Memproses input user melalui chatbot engine
         bot_response = chatbot.get_response(request.user_id, request.message)
@@ -46,13 +48,13 @@ async def chat(request: ChatRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/history/{user_id}")
-async def get_history(user_id: str):
+def get_history(user_id: str):
     return {"user_id": user_id, "history": chatbot.get_chat_history(user_id)}
 
 @app.delete("/history/{user_id}")
-async def clear_history(user_id: str):
-    if user_id in chatbot.memory:
-        del chatbot.memory[user_id]
+def clear_history(user_id: str):
+    success = chatbot.clear_history(user_id)
+    if success:
         return {"message": f"Riwayat untuk user {user_id} berhasil dihapus."}
     return {"message": f"Tidak ada riwayat untuk user {user_id}."}
 

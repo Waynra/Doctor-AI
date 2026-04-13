@@ -56,57 +56,29 @@ function removeBotTyping() {
   if (last && last.querySelector('span.italic')) chatThread.removeChild(last);
 }
 
-// NLP/AI Logic terintegrasi menggunakan compromise.js
-function generateAIResponse(message) {
-  // Jalankan model NLP pada text
-  let doc = nlp(message);
-  let text = message.toLowerCase();
-  
-  // Definisikan 'Intents' atau maksud pertanyaan dengan pendekatan keyword NLP
-  const intents = {
-    greeting: ["halo", "hai", "selamat p", "selamat s", "selamat m", "hey"],
-    symptom_headache: ["pusing", "sakit kepala", "migrain", "migran", "cekat", "kepala"],
-    symptom_stomach: ["maag", "mual", "sakit perut", "diare", "lambung", "mules", "perut"],
-    symptom_fever: ["demam", "panas", "menggigil", "meriang", "suhu"],
-    tips_healthy: ["tips", "hidup sehat", "makanan sehat", "diet", "olahraga", "jaga tubuh"],
-    gratitude: ["terima kasih", "thanks", "makasih", "baik", "oke"]
-  };
-
-  let matchedIntent = 'unknown';
-
-  for (let intent in intents) {
-    if (intents[intent].some(kw => text.includes(kw))) {
-      matchedIntent = intent;
-      break;
-    }
-  }
-
-  // Respon AI adaptif berdasarkan deteksi dari model
-  switch (matchedIntent) {
-    case 'greeting':
-      return "Halo! Ada keluhan fisik yang sedang kamu rasakan saat ini, atau mungkin butuh tips gaya hidup sehat?";
-    case 'symptom_headache':
-      return "Keluhan pusing bisa disebabkan oleh kurangnya jam tidur, stres, atau dehidrasi ringan. Coba cukupi minum air putih dan rehat dari layar gadget. Jika pusing memburuk atau tidak hilang 2-3 hari, segera periksakan ke dokter.";
-    case 'symptom_stomach':
-      return "Gangguan lambung atau pencernaan sering muncul akibat pola makan tak teratur. Cobalah makan teratur dengan porsi kecil, hindari pedas, dan perbanyak air hangat. Hubungi klinik terdekat jika sakit perut tak tertahankan.";
-    case 'symptom_fever':
-      return "Masa demam adalah cara sistem imun kita melawan invasi virus/bakteri. Perbanyak air putih, istirahat berbaring, dan konsumsi paracetamol jika perlu. Tapi ingat, bila demam menetap >3 hari atau melebihi 39°C, bantuan tenaga medis adalah prioritas.";
-    case 'tips_healthy':
-      return "Tips utama sehat paripurna: 1. Tidur ideal 7-8 jam 2. Kurangi manis/gorengan 3. Aktivitas fisik (berjalan 30 menit sehari) sudah cukup baik. Adakah target kesehatan tertentu yang mau kamu capai?";
-    case 'gratitude':
-      return "Dengan senang hati! Jangan ragu ketikkan pertanyaan lain kapan pun kamu butuh masukan medis ringan.";
-    default:
-      // Gunakan NLP compromise untuk mengekstrak subjek (noun/topik utama)
-      let nouns = doc.nouns().out('array');
-      let topic = nouns.length > 0 ? nouns[0] : null;
-      if (topic) {
-        return `Aku membaca kamu menyebut topik soal "${topic}". Berhubung aku masih versi simulasi, bisa kamu jelaskan lebih detail kondisinya?`;
-      }
-      return "Aku belum menangkap detail spesifik dari masalah yang kamu infokan. Bisa diceritakan perlahan gejala apa tepatnya yang dominan?";
+// Fetch API logic terintegrasi dengan backend FastAPI python
+async function getAIResponseFromServer(message) {
+  try {
+    const response = await fetch('http://localhost:8000/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: userId,
+        message: message
+      })
+    });
+    
+    const data = await response.json();
+    return data.response;
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return "Maaf, server Dokter Santai (backend) sepertinya sedang tidak aktif. Pastikan Anda sudah menjalankan `python main.py` ya!";
   }
 }
 
-chatForm.addEventListener('submit', (e) => {
+chatForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const message = userInput.value.trim();
   if (!message) return;
@@ -115,13 +87,12 @@ chatForm.addEventListener('submit', (e) => {
   userInput.value = '';
   addBotTyping();
   
-  // Simulasi model process delay (latency NLP)
-  setTimeout(() => {
-    removeBotTyping();
-    const responseText = generateAIResponse(message);
-    addMessage('bot', responseText, 'Baru saja');
-    updateSuggestions(responseText);
-  }, 1000 + Math.random() * 1500);
+  // Ambil respon langsung dari server FastAPI LLM Python
+  const responseText = await getAIResponseFromServer(message);
+  
+  removeBotTyping();
+  addMessage('bot', responseText, 'Baru saja');
+  updateSuggestions();
 });
 
 function updateSuggestions(lastBotMsg) {

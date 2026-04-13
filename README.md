@@ -1,58 +1,46 @@
-# Chatbot Dokter Santai AI 🩺🤖
+# Chatbot Dokter Santai AI 🩺
 
 Chatbot ini adalah asisten medis berbasis AI yang dirancang untuk memberikan edukasi kesehatan dan layanan pelanggan dengan gaya bahasa yang santai, akrab, dan menenangkan.
 
 ## Fitur Utama
-- **NLP Engine**: Menggunakan logika pemrosesan bahasa alami untuk memahami keluhan pengguna.
-- **Persona Dokter Santai**: Gaya bahasa yang akrab (menggunakan 'kamu', 'bro/sis') namun tetap informatif secara medis.
-- **Memory System**: Menyimpan riwayat percakapan untuk memberikan respon yang kontekstual.
-- **Integrasi API Eksternal (Simulasi)**: Mendapatkan tips kesehatan harian dan informasi penyakit dari database medis.
-- **Rekomendasi**: Memberikan saran gaya hidup sehat berdasarkan topik pembicaraan.
+- **Generative AI LLM**: Didukung penuh oleh kecerdasan model canggih *Google Gemini 2.5 Flash* lewat paket `google-genai` SDK terbaru untuk memahami hampir seluruh ragam kalimat pengguna.
+- **Persona Dokter Santai**: Gaya bahasa *Prompting* diatur mendalam agar AI bertindak super akrab (menyebut 'kamu', 'bro/sis') dan tidak serba-kaku (*robotic*).
+- **Dual-State Memory System**: Menyimpan untaian riwayat percakapan Anda baik di ranah *server FastAPI lokal* maupun sinkronisasi asli berbasis _System Context_ agar konsultasi tidak tercampur/lupa.
+- **Konsultasi Tanpa Batas Ruang Lingkup**: Tidak terkunci pada kata sandi tertentu (bukan tipe _hardcoded intent_), sehingga model bersedia menjawab keluhan fisik paling rumit sekalipun.
 
 ## Tampilan Antarmuka (UI)
 Berikut adalah tampilan antarmuka (UI) frontend yang telah diperbarui, terasa minimalis dan berfokus murni pada fitur utama Chatbot (Konsultasi Aktif):
 
-
 ![Tampilan UI Dokter Santai](UI%20Preview.png)
-=======
-![Tampilan UI Dokter Santai](ui preview.png)
 
+## Panduan Instalasi & Menjalankan
 
-## Panduan Konfigurasi & Menjalankan (Untuk Pemula)
+Aplikasi ini sekarang berjalan menggunakan arsitektur *Fullstack* (Klien & Peladen) yang nyata dan secara harafiah diotaki langsung oleh kehebatan Google Gemini. Oleh hal itu, Anda **WAJIB** menjalankan *server backend* Python-nya terlebih dahulu agar tampilannya tidak error kehilangan koneksi klien.
 
-Ikuti langkah demi langkah di bawah ini dengan santai untuk mulai memakai aplikasi ini di komputer Anda:
+**Langkah 1: Siapkan API Key Google Gemini (Gratis)**
+- Buka antarmuka situs [Google AI Studio](https://aistudio.google.com/app/apikey).
+- Buat dan salin (*Copy*) sebuah ruas *API Key*. 
+- Dalam *folder template* kode ini, cari berkas `.env.example` lalu ubah persis memudar format berawalan namanya ke file konfigurasi `.env`.
+- Masukkan teks sandi salinan Anda langsung tanpa ada tambahan spasi: `GEMINI_API_KEY="AI..."`
 
-### Cara 1: Mengakses Chatbot AI Secara Langsung (Sangat Mudah)
-Kecerdasan buatan (Logika *NLP/Natural Language Processing*) saat ini sudah terintegrasi langsung di dalam berkas HTML, sehingga Anda tidak perlu menyalakan *server backend* untuk mencoba konsultasi awal:
-1. Buka folder `frontend` yang ada di dalam proyek ini menggunakan *File Explorer*.
-2. Cari file bernama **`dokter-santai.html`**.
-3. **Klik dua kali** (`Double click`) pada file tersebut.
-4. Voila! Tampilan Chatbot AI akan otomatis terbuka di browser Anda (Google Chrome / Microsoft Edge / Safari) dan siap menjadi teman konsultasi kesehatan.
+**Langkah 2: Instalasi Kebutuhan Sistem (Dependensi)**
+- Pastikan sistem peranti komputer telah membekali instalasi [Python](https://www.python.org/downloads/) aktif dan nilai jejak lokasinya ditambahkan ke jalur *System PATH*.
+- Buka jendela Hitam *Terminal / CMD* (pastikan ada di direktori lokasi folder ini), dan tempelkan proses tarikan muat:
+  ```bash
+  pip install -r requirements.txt
+  ```
 
-### Cara 2: Menyalakan Server Backend (Untuk Pengembangan / API)
-Bila Anda adalah *developer* yang ingin mengubah fungsionalitas lanjutan di sistem Python, Anda perlu menjalankan proses ini:
+**Langkah 3: Jalankan Mesin Server Backend Otak**
+- Langsung dari terminal yang identik pasca unduhan sukses, jalankan instruksi:
+  ```bash
+  python main.py
+  ```
+- Biarkan *Terminal / CMD* Anda meronta menyajikan jejak rekam aktif berjalan (_Running Uvicorn_) terpusat di ranah `http://localhost:8000`. 
 
-**Langkah 1: Pastikan Python Sudah Terinstal**
-- Jika komputer Anda belum pernah dipasangi bahasa pemrograman Python, unduh gratis dari [python.org/downloads](https://www.python.org/downloads/). 
-- *Penting:* Ingatlah untuk mencentang tulisan *"Add Python to PATH"* di bagian bawah saat awal mula klik tombol Install!
-
-**Langkah 2: Buka Jendela Perintah (Terminal / CMD)**
-- Buka lokasi folder proyek ini menggunakan File Explorer.
-- Di kotak alamat atas (*Address Bar*), ketikkan `cmd` kemudian tekan *Enter* di keyboard. Jendela terminal hitam akan muncul.
-
-**Langkah 3: Mengunduh Persiapan Sistem (Dependensi)**
-- Pada jendela hitam tersebut, salin & tempel kode ini lalu tekan *Enter*:
-   ```bash
-   pip install -r requirements.txt
-   ```
-- Tunggu proses muatan atau *download* bar merah/putih hingga tertulis status *Successful*.
-
-**Langkah 4: Menghidupkan Mesin (Server)**
-- Masih di jendela hitam yang sama, ketikkan:
-   ```bash
-   python main.py
-   ```
-- Biarkan jendela layar hitam tersebut tetap terbuka saat mengecek aplikasinya. Tanda bahwa *server* telah sukses menyala adalah ketika terminal menayangkan tulisan bahwa server berjalan di `http://localhost:8000`.
+**Langkah 4: Buka Aplikasi Antarmuka HTML**
+- Masuk ke folder *File Explorer* bernama `frontend`.
+- Pilah penemuan berkas **`dokter-santai.html`** dan hantam segera **`Klik 2x / Double-Click`**. 
+- Tampilan Chatbot AI Dokter Santai yang cantik nan segar menguar lewat bilah layar mesin jelajah pelacak peramban Anda (Chrome/Safari/Edge), dan selamat asyik berkonsultasi AI memukau!
 
 ## API Endpoints
 
