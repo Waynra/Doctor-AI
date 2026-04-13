@@ -1,6 +1,6 @@
 # Chatbot Dokter Santai AI 🩺
 
-Chatbot ini adalah asisten medis berbasis AI yang dirancang untuk memberikan edukasi kesehatan dan layanan pelanggan dengan gaya bahasa yang santai, akrab, dan menenangkan.
+Chatbot asisten medis berbasis AI yang dirancang untuk memberikan edukasi kesehatan dan layanan pelanggan dengan gaya bahasa yang santai, akrab, dan menenangkan.
 
 ## Fitur Utama
 - **Generative AI LLM**: Didukung penuh oleh kecerdasan model canggih *Google Gemini 2.5 Flash* lewat paket `google-genai` SDK terbaru untuk memahami hampir seluruh ragam kalimat pengguna.
@@ -9,7 +9,7 @@ Chatbot ini adalah asisten medis berbasis AI yang dirancang untuk memberikan edu
 - **Konsultasi Tanpa Batas Ruang Lingkup**: Tidak terkunci pada kata sandi tertentu (bukan tipe _hardcoded intent_), sehingga model bersedia menjawab keluhan fisik paling rumit sekalipun.
 
 ## Tampilan Antarmuka (UI)
-Berikut adalah tampilan antarmuka (UI) frontend yang telah diperbarui, terasa minimalis dan berfokus murni pada fitur utama Chatbot (Konsultasi Aktif):
+Berikut adalah tampilan antarmuka (UI) :
 
 ![Tampilan UI Dokter Santai](UI%20Preview.png)
 
